@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Tools — ComputerFy Tools</title>
+  <meta name="description" content="Browse all free online tools by ComputerFy. Meta tags, QR codes, image compressor, PDF tools, CSS tools and more." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg: #07070c;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --accent: #a78bfa;
+      --gradient: linear-gradient(135deg, #6366f1 0%, #a78bfa 50%, #ec4899 100%);
+      --radius: 16px;
+      --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== NAVBAR ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 7, 12, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -6px rgba(99, 102, 241, 0.6);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* ========== PAGE HEADER ========== */
+    .page-header {
+      padding: 70px 0 40px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #fff 40%, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ========== SEARCH & FILTER ========== */
+    .controls {
+      margin-bottom: 40px;
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: white;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .search-box input:focus {
+      border-color: rgba(99, 102, 241, 0.5);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .pill {
+      padding: 8px 18px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    .pill.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.5);
+      color: var(--primary-light);
+    }
+
+    /* ========== TOOLS GRID ========== */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: var(--shadow);
+    }
+
+    .tool-card:hover::before {
+      opacity: 1;
+    }
+
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+      flex-shrink: 0;
+    }
+
+    .tool-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tool-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      flex-grow: 1;
+    }
+
+    .tool-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .tool-card.hidden {
+      display: none;
+    }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 16px;
+      font-size: 0.95rem;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-col a {
+      display: block;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .page-header {
+        padding: 50px 0 30px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i data-lucide="wrench" size="20"></i>
+        </div>
+        ComputerFy
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="tools.html" class="active">All Tools</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="tools.html" class="btn btn-primary">Explore Tools</a>
+      </nav>
+
+      <button class="mobile-menu-btn">
+        <i data-lucide="menu" size="24"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>All Tools</h1>
+      <p>16 free online tools to make your development and content creation faster</p>
+    </div>
+  </section>
+
+  <!-- Search + Filters -->
+  <section class="container controls">
+    <div class="search-box">
+      <i data-lucide="search" size="20" class="search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Search tools..." autocomplete="off">
+    </div>
+
+    <div class="filter-pills">
+      <div class="pill active" data-filter="all">All</div>
+      <div class="pill" data-filter="generators">Generators</div>
+      <div class="pill" data-filter="code">Code Tools</div>
+      <div class="pill" data-filter="image">Image & Media</div>
+      <div class="pill" data-filter="seo">SEO & Meta</div>
+      <div class="pill" data-filter="pdf">PDF</div>
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section class="container">
+    <div class="tools-grid" id="toolsGrid">
+
+      <!-- 1. Meta Tag Generator -->
+      <a href="meta-tag-generator.html" class="tool-card" data-category="generators seo" data-name="meta tag generator">
+        <div class="tool-icon"><i data-lucide="tags" size="24"></i></div>
+        <div>
+          <h3>Meta Tag Generator</h3>
+          <p>Generate perfect SEO meta tags, Open Graph and Twitter cards in seconds.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 2. HTML Table Generator -->
+      <a href="html-table-generator.html" class="tool-card" data-category="generators code" data-name="html table generator">
+        <div class="tool-icon"><i data-lucide="table" size="24"></i></div>
+        <div>
+          <h3>HTML Table Generator</h3>
+          <p>Create clean and responsive HTML tables visually without writing code.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 3. Image Compressor -->
+      <a href="image-compressor.html" class="tool-card" data-category="image" data-name="image compressor">
+        <div class="tool-icon"><i data-lucide="image" size="24"></i></div>
+        <div>
+          <h3>Image Compressor</h3>
+          <p>Compress JPG, PNG & WebP images without losing quality. 100% private.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 4. Ads.txt Generator -->
+      <a href="adstxt-generator.html" class="tool-card" data-category="generators seo" data-name="ads.txt generator">
+        <div class="tool-icon"><i data-lucide="file-code" size="24"></i></div>
+        <div>
+          <h3>Ads.txt Generator</h3>
+          <p>Generate valid ads.txt file for your website or Blogger blog easily.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 5. Robots.txt Generator -->
+      <a href="robotstxt-generator.html" class="tool-card" data-category="generators seo" data-name="robots.txt generator">
+        <div class="tool-icon"><i data-lucide="bot" size="24"></i></div>
+        <div>
+          <h3>Robots.txt Generator</h3>
+          <p>Create custom robots.txt file to control search engine crawling.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 6. Google Drive Direct Link -->
+      <a href="google-drive-link.html" class="tool-card" data-category="generators" data-name="google drive direct link">
+        <div class="tool-icon"><i data-lucide="hard-drive" size="24"></i></div>
+        <div>
+          <h3>Google Drive Direct Link</h3>
+          <p>Convert Google Drive sharing links into direct download links.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 7. iFrame Generator -->
+      <a href="iframe-generator.html" class="tool-card" data-category="generators code" data-name="iframe generator">
+        <div class="tool-icon"><i data-lucide="frame" size="24"></i></div>
+        <div>
+          <h3>iFrame Generator</h3>
+          <p>Generate responsive iframe embed codes for any website or video.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 8. RGBA Color Picker -->
+      <a href="rgba-color-picker.html" class="tool-card" data-category="code" data-name="rgba color picker">
+        <div class="tool-icon"><i data-lucide="pipette" size="24"></i></div>
+        <div>
+          <h3>RGBA Color Picker</h3>
+          <p>Pick colors and get HEX, RGB, RGBA and HSL values instantly.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 9. CSS Gradient Generator -->
+      <a href="css-gradient-generator.html" class="tool-card" data-category="code" data-name="css gradient generator">
+        <div class="tool-icon"><i data-lucide="palette" size="24"></i></div>
+        <div>
+          <h3>CSS Gradient Generator</h3>
+          <p>Create beautiful linear & radial gradients with live CSS code.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 10. QR Code Generator -->
+      <a href="qr-code-generator.html" class="tool-card" data-category="generators" data-name="qr code generator">
+        <div class="tool-icon"><i data-lucide="qr-code" size="24"></i></div>
+        <div>
+          <h3>QR Code Generator</h3>
+          <p>Generate custom QR codes for links, text, WiFi, email and more.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 11. YouTube Thumbnail Downloader -->
+      <a href="youtube-thumbnail-downloader.html" class="tool-card" data-category="image" data-name="youtube thumbnail downloader">
+        <div class="tool-icon"><i data-lucide="youtube" size="24"></i></div>
+        <div>
+          <h3>YouTube Thumbnail Downloader</h3>
+          <p>Download high-quality thumbnails from any YouTube video.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 12. HTML Previewer -->
+      <a href="html-previewer.html" class="tool-card" data-category="code" data-name="html previewer">
+        <div class="tool-icon"><i data-lucide="eye" size="24"></i></div>
+        <div>
+          <h3>HTML Previewer</h3>
+          <p>Write HTML/CSS/JS and see live preview instantly in the browser.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 13. HTML Encoder / Decoder -->
+      <a href="html-encoder-decoder.html" class="tool-card" data-category="code" data-name="html encoder decoder">
+        <div class="tool-icon"><i data-lucide="code-2" size="24"></i></div>
+        <div>
+          <h3>HTML Encoder / Decoder</h3>
+          <p>Encode or decode HTML entities quickly and safely.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 14. All-in-One PDF Tools -->
+      <a href="pdf-tools.html" class="tool-card" data-category="pdf" data-name="pdf tools">
+        <div class="tool-icon"><i data-lucide="file-text" size="24"></i></div>
+        <div>
+          <h3>All-in-One PDF Tools</h3>
+          <p>Merge, split, compress and convert PDF files easily in your browser.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 15. CSS Minifier & Beautifier -->
+      <a href="css-minifier.html" class="tool-card" data-category="code" data-name="css minifier beautifier">
+        <div class="tool-icon"><i data-lucide="minimize-2" size="24"></i></div>
+        <div>
+          <h3>CSS Minifier & Beautifier</h3>
+          <p>Minify or beautify your CSS code with one click.</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+      <!-- 16. YouTube Video Downloader -->
+      <a href="youtube-video-downloader.html" class="tool-card" data-category="image" data-name="youtube video downloader">
+        <div class="tool-icon"><i data-lucide="download" size="24"></i></div>
+        <div>
+          <h3>YouTube Video Downloader</h3>
+          <p>Download YouTube videos in different qualities (client-side limited).</p>
+        </div>
+        <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+      </a>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+      <i data-lucide="search-x" size="48" style="margin-bottom: 16px; opacity: 0.5;"></i>
+      <h3 style="margin-bottom: 8px; color: white;">No tools found</h3>
+      <p>Try a different search term or filter</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <i data-lucide="wrench" size="20"></i>
+            </div>
+            ComputerFy
+          </a>
+          <p>Free online tools for developers, bloggers and digital creators. Fast, private and beautiful.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <a href="tools.html">All Tools</a>
+          <a href="meta-tag-generator.html">Meta Tag Generator</a>
+          <a href="qr-code-generator.html">QR Code Generator</a>
+          <a href="image-compressor.html">Image Compressor</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="https://computerfy.blogspot.com" target="_blank">Blog</a>
+          <a href="#">Twitter / X</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 ComputerFy Tools. All rights reserved.</span>
+        <span>Made with ❤️ for creators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // Search + Filter Logic
+    const searchInput = document.getElementById('searchInput');
+    const pills = document.querySelectorAll('.pill');
+    const cards = document.querySelectorAll('.tool-card');
+    const noResults = document.getElementById('noResults');
+
+    let currentFilter = 'all';
+
+    function filterTools() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        const category = card.getAttribute('data-category');
+
+        const matchesSearch = name.includes(searchTerm);
+        const matchesFilter = currentFilter === 'all' || category.includes(currentFilter);
+
+        if (matchesSearch && matchesFilter) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      noResults.classList.toggle('show', visibleCount === 0);
+    }
+
+    searchInput.addEventListener('input', filterTools);
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilter = pill.getAttribute('data-filter');
+        filterTools();
+      });
+    });
+  </script>
+</body>
+</html>
