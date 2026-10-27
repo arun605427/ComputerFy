@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ComputerFy Tools — Free Online Tools for Developers & Creators</title>
+  <meta name="description" content="Free, fast and beautiful online tools for developers, bloggers and creators. Meta tags, QR codes, image compressor, PDF tools and more." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg: #07070c;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --accent: #a78bfa;
+      --gradient: linear-gradient(135deg, #6366f1 0%, #a78bfa 50%, #ec4899 100%);
+      --radius: 16px;
+      --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Background effects */
+    .bg-glow {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== NAVBAR ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 7, 12, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -6px rgba(99, 102, 241, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #fff 30%, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========== FEATURED TOOLS ========== */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: var(--shadow);
+    }
+
+    .tool-card:hover::before {
+      opacity: 1;
+    }
+
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+    }
+
+    .tool-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tool-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      flex-grow: 1;
+    }
+
+    .tool-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    /* ========== FEATURES ========== */
+    .features {
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      background: var(--gradient);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .feature-item h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .feature-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ========== CTA ========== */
+    .cta {
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(167, 139, 250, 0.1));
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 24px;
+      padding: 60px 40px;
+    }
+
+    .cta-box h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 16px;
+      font-size: 0.95rem;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-col a {
+      display: block;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero {
+        padding: 70px 0 60px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i data-lucide="wrench" size="20"></i>
+        </div>
+        ComputerFy
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="tools.html">All Tools</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="tools.html" class="btn btn-primary">Explore Tools</a>
+      </nav>
+
+      <button class="mobile-menu-btn" onclick="toggleMenu()">
+        <i data-lucide="menu" size="24"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge">
+        <i data-lucide="sparkles" size="16"></i>
+        16+ Free Online Tools
+      </div>
+      <h1>Free Online Tools<br>for Developers & Creators</h1>
+      <p>Fast, beautiful and privacy-friendly tools. No signup required. Everything runs in your browser.</p>
+      <div class="hero-btns">
+        <a href="tools.html" class="btn btn-primary">
+          Browse All Tools
+          <i data-lucide="arrow-right" size="18"></i>
+        </a>
+        <a href="#featured" class="btn btn-outline">
+          Popular Tools
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Tools -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Tools</h2>
+        <p>Most used tools by developers and creators</p>
+      </div>
+
+      <div class="tools-grid">
+        <!-- Tool 1 -->
+        <a href="meta-tag-generator.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="tags" size="24"></i></div>
+          <div>
+            <h3>Meta Tag Generator</h3>
+            <p>Generate perfect SEO meta tags for your website in seconds.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 2 -->
+        <a href="qr-code-generator.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="qr-code" size="24"></i></div>
+          <div>
+            <h3>QR Code Generator</h3>
+            <p>Create custom QR codes for links, text, WiFi and more.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 3 -->
+        <a href="image-compressor.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="image" size="24"></i></div>
+          <div>
+            <h3>Image Compressor</h3>
+            <p>Compress images without losing quality. Fast & private.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 4 -->
+        <a href="css-gradient-generator.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="palette" size="24"></i></div>
+          <div>
+            <h3>CSS Gradient Generator</h3>
+            <p>Create beautiful CSS gradients with live preview.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 5 -->
+        <a href="html-table-generator.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="table" size="24"></i></div>
+          <div>
+            <h3>HTML Table Generator</h3>
+            <p>Build clean HTML tables visually without writing code.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 6 -->
+        <a href="youtube-thumbnail-downloader.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="youtube" size="24"></i></div>
+          <div>
+            <h3>YouTube Thumbnail Downloader</h3>
+            <p>Download HD thumbnails from any YouTube video.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 7 -->
+        <a href="pdf-tools.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="file-text" size="24"></i></div>
+          <div>
+            <h3>All-in-One PDF Tools</h3>
+            <p>Merge, split, compress and convert PDF files easily.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+
+        <!-- Tool 8 -->
+        <a href="html-encoder-decoder.html" class="tool-card">
+          <div class="tool-icon"><i data-lucide="code-2" size="24"></i></div>
+          <div>
+            <h3>HTML Encoder / Decoder</h3>
+            <p>Encode or decode HTML entities quickly and safely.</p>
+          </div>
+          <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
+        </a>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <a href="tools.html" class="btn btn-outline">
+          View All 16 Tools
+          <i data-lucide="arrow-right" size="18"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why ComputerFy Tools?</h2>
+        <p>Built for speed, privacy and simplicity</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="zap" size="26"></i></div>
+          <h3>Lightning Fast</h3>
+          <p>All tools run instantly in your browser. No waiting, no uploads needed.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="shield-check" size="26"></i></div>
+          <h3>Privacy First</h3>
+          <p>Your files and data never leave your device. Everything stays private.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="smartphone" size="26"></i></div>
+          <h3>Fully Responsive</h3>
+          <p>Works perfectly on desktop, tablet and mobile devices.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="gift" size="26"></i></div>
+          <h3>100% Free</h3>
+          <p>No hidden fees, no signup, no limits. Use as much as you want.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to boost your workflow?</h2>
+        <p>Explore all free tools and make your development process smoother.</p>
+        <a href="tools.html" class="btn btn-primary">
+          Explore All Tools
+          <i data-lucide="arrow-right" size="18"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <i data-lucide="wrench" size="20"></i>
+            </div>
+            ComputerFy
+          </a>
+          <p>Free online tools for developers, bloggers and digital creators. Fast, private and beautiful.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <a href="tools.html">All Tools</a>
+          <a href="meta-tag-generator.html">Meta Tag Generator</a>
+          <a href="qr-code-generator.html">QR Code Generator</a>
+          <a href="image-compressor.html">Image Compressor</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="https://computerfy.blogspot.com" target="_blank">Blog</a>
+          <a href="#">Twitter / X</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 ComputerFy Tools. All rights reserved.</span>
+        <span>Made with ❤️ for creators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleMenu() {
+      // Simple mobile menu (expand later if needed)
+      alert("Mobile menu — next version me full menu add karenge");
+    }
+  </script>
+</body>
+</html>
