@@ -151,6 +151,90 @@
       border: none;
       color: white;
       cursor: pointer;
+      padding: 8px;
+    }
+
+    /* ========== MOBILE MENU ========== */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 340px;
+      height: 100vh;
+      background: #0c0c14;
+      border-left: 1px solid var(--border);
+      z-index: 1000;
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .close-menu {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .close-menu:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mobile-nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 500;
+      padding: 14px 16px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .mobile-nav-links a:hover {
+      background: rgba(99, 102, 241, 0.12);
+      color: white;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     /* ========== PAGE HEADER ========== */
@@ -331,7 +415,6 @@
       display: none;
     }
 
-    /* No results */
     .no-results {
       text-align: center;
       padding: 60px 20px;
@@ -443,11 +526,38 @@
         <a href="tools.html" class="btn btn-primary">Explore Tools</a>
       </nav>
 
-      <button class="mobile-menu-btn">
+      <button class="mobile-menu-btn" id="menuBtn">
         <i data-lucide="menu" size="24"></i>
       </button>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i data-lucide="wrench" size="20"></i>
+        </div>
+        ComputerFy
+      </a>
+      <button class="close-menu" id="closeMenu">
+        <i data-lucide="x" size="24"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="tools.html">All Tools</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="tools.html" class="btn btn-primary" style="margin-top: 20px; justify-content: center;">
+        Explore Tools
+      </a>
+    </nav>
+  </div>
+
+  <!-- Overlay -->
+  <div class="menu-overlay" id="menuOverlay"></div>
 
   <!-- Page Header -->
   <section class="page-header">
@@ -478,7 +588,6 @@
   <section class="container">
     <div class="tools-grid" id="toolsGrid">
 
-      <!-- 1. Meta Tag Generator -->
       <a href="meta-tag-generator.html" class="tool-card" data-category="generators seo" data-name="meta tag generator">
         <div class="tool-icon"><i data-lucide="tags" size="24"></i></div>
         <div>
@@ -488,7 +597,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 2. HTML Table Generator -->
       <a href="html-table-generator.html" class="tool-card" data-category="generators code" data-name="html table generator">
         <div class="tool-icon"><i data-lucide="table" size="24"></i></div>
         <div>
@@ -498,7 +606,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 3. Image Compressor -->
       <a href="image-compressor.html" class="tool-card" data-category="image" data-name="image compressor">
         <div class="tool-icon"><i data-lucide="image" size="24"></i></div>
         <div>
@@ -508,7 +615,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 4. Ads.txt Generator -->
       <a href="adstxt-generator.html" class="tool-card" data-category="generators seo" data-name="ads.txt generator">
         <div class="tool-icon"><i data-lucide="file-code" size="24"></i></div>
         <div>
@@ -518,7 +624,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 5. Robots.txt Generator -->
       <a href="robotstxt-generator.html" class="tool-card" data-category="generators seo" data-name="robots.txt generator">
         <div class="tool-icon"><i data-lucide="bot" size="24"></i></div>
         <div>
@@ -528,7 +633,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 6. Google Drive Direct Link -->
       <a href="google-drive-link.html" class="tool-card" data-category="generators" data-name="google drive direct link">
         <div class="tool-icon"><i data-lucide="hard-drive" size="24"></i></div>
         <div>
@@ -538,7 +642,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 7. iFrame Generator -->
       <a href="iframe-generator.html" class="tool-card" data-category="generators code" data-name="iframe generator">
         <div class="tool-icon"><i data-lucide="frame" size="24"></i></div>
         <div>
@@ -548,7 +651,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 8. RGBA Color Picker -->
       <a href="rgba-color-picker.html" class="tool-card" data-category="code" data-name="rgba color picker">
         <div class="tool-icon"><i data-lucide="pipette" size="24"></i></div>
         <div>
@@ -558,7 +660,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 9. CSS Gradient Generator -->
       <a href="css-gradient-generator.html" class="tool-card" data-category="code" data-name="css gradient generator">
         <div class="tool-icon"><i data-lucide="palette" size="24"></i></div>
         <div>
@@ -568,7 +669,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 10. QR Code Generator -->
       <a href="qr-code-generator.html" class="tool-card" data-category="generators" data-name="qr code generator">
         <div class="tool-icon"><i data-lucide="qr-code" size="24"></i></div>
         <div>
@@ -578,7 +678,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 11. YouTube Thumbnail Downloader -->
       <a href="youtube-thumbnail-downloader.html" class="tool-card" data-category="image" data-name="youtube thumbnail downloader">
         <div class="tool-icon"><i data-lucide="youtube" size="24"></i></div>
         <div>
@@ -588,7 +687,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 12. HTML Previewer -->
       <a href="html-previewer.html" class="tool-card" data-category="code" data-name="html previewer">
         <div class="tool-icon"><i data-lucide="eye" size="24"></i></div>
         <div>
@@ -598,7 +696,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 13. HTML Encoder / Decoder -->
       <a href="html-encoder-decoder.html" class="tool-card" data-category="code" data-name="html encoder decoder">
         <div class="tool-icon"><i data-lucide="code-2" size="24"></i></div>
         <div>
@@ -608,7 +705,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 14. All-in-One PDF Tools -->
       <a href="pdf-tools.html" class="tool-card" data-category="pdf" data-name="pdf tools">
         <div class="tool-icon"><i data-lucide="file-text" size="24"></i></div>
         <div>
@@ -618,7 +714,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 15. CSS Minifier & Beautifier -->
       <a href="css-minifier.html" class="tool-card" data-category="code" data-name="css minifier beautifier">
         <div class="tool-icon"><i data-lucide="minimize-2" size="24"></i></div>
         <div>
@@ -628,7 +723,6 @@
         <div class="tool-link">Open Tool <i data-lucide="arrow-right" size="16"></i></div>
       </a>
 
-      <!-- 16. YouTube Video Downloader -->
       <a href="youtube-video-downloader.html" class="tool-card" data-category="image" data-name="youtube video downloader">
         <div class="tool-icon"><i data-lucide="download" size="24"></i></div>
         <div>
@@ -694,7 +788,34 @@
   <script>
     lucide.createIcons();
 
-    // Search + Filter Logic
+    // ========== Mobile Menu ==========
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeMenu');
+
+    function openMenu() {
+      mobileMenu.classList.add('active');
+      menuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+
+    // Close when link is clicked
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // ========== Search + Filter ==========
     const searchInput = document.getElementById('searchInput');
     const pills = document.querySelectorAll('.pill');
     const cards = document.querySelectorAll('.tool-card');
